@@ -1,0 +1,51 @@
+MoneyRate Telegram Bot
+
+🚧 This project is still under development 🚧
+
+About the Project
+
+MoneyRate is a simple Telegram bot designed to provide currency exchange rates. Currently, it supports major currencies like USD, RUB, and EUR.
+
+How It Works
+
+The bot will be able to:
+✅ Respond to the /start command to initialize the bot
+✅ Provide help using the /help command
+✅ Convert currencies with a command like:
+
+100 USD to EUR
+
+(Not functional yet! Still in development.)
+
+Installation & Setup
+
+1. Ensure Python is installed:
+
+python --version
+
+
+2. Install the required dependencies:
+
+pip install python-telegram-bot
+
+
+3. Run the bot (once it's fully developed):
+
+python money_rate.py
+
+
+
+Project Structure
+
+money_rate.py – Main bot logic (incomplete)
+
+README.md – This documentation
+
+config.py – Configuration file (for API keys and settings)
+
+
+Planned Features
+
+🚀 Automatically update exchange rates
+🚀 Support more currencies
+🚀 Add an inline keyboard for easier use
