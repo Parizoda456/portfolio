@@ -1,0 +1,25 @@
+# MoneyRate Bot  
+
+This bot is designed to convert currency rates in Telegram.  
+
+## Technologies Used:  
+- Python  
+- Telegram API  
+- python-telegram-bot  
+
+## How to Use:  
+1. Run the `main.py` file to start the bot.  
+2. Use the Telegram bot to check exchange rates.  
+3. Enter the amount and currency code to convert (e.g., `15000 RUB UZS`).  
+
+## Features:  
+✅ Converts between USD, EUR, RUB, and UZS  
+✅ Provides real-time exchange rates  
+✅ Simple and easy-to-use interface  
+
+## Installation:  
+```sh
+git clone https://github.com/YourUsername/moneyrate-bot.git  
+cd moneyrate-bot  
+pip install -r requirements.txt  
+python main.py
