@@ -1,0 +1,58 @@
+from telegram import Update
+from telegram.ext import Application, CommandHandler, MessageHandler, filters, CallbackContext
+
+# Valyuta kurslari
+KURSLAR = {
+    "USD": 1,  
+    "RUB": 0.011,  
+    "EUR": 1.08,  
+    "UZS": 0.000078  
+}
+
+# Valyuta almashtirish funksiyasi
+def valyuta_ayirboshlash(miqdor, valyuta, manzil="USD"):
+    if valyuta in KURSLAR and manzil in KURSLAR:
+        usd_miqdor = miqdor * KURSLAR[valyuta]  
+        natija = usd_miqdor / KURSLAR[manzil]  
+        return round(natija, 2)
+    return None
+
+# /start komandasi uchun funksiya
+async def start(update: Update, context: CallbackContext) -> None:
+    await update.message.reply_text("Assalomu alaykum! Valyuta ayirboshlash botiga xush kelibsiz!")
+
+# Valyutani konvertatsiya qilish
+async def convert(update: Update, context: CallbackContext) -> None:
+    text = update.message.text.split()
+    if len(text) != 3:
+        await update.message.reply_text("Format: <miqdor> <valyuta> <manzil>. Masalan: 15000 RUB UZS")
+        return
+
+    try:
+        miqdor = float(text[0])
+        valyuta = text[1].upper()
+        manzil = text[2].upper()
+
+        natija = valyuta_ayirboshlash(miqdor, valyuta, manzil)
+        if natija is not None:
+            javob = f"{miqdor} {valyuta} = {natija} {manzil}"
+            await update.message.reply_text(javob)
+        else:
+            await update.message.reply_text("Noto‘g‘ri valyuta kodi kiritildi!")
+
+    except ValueError:
+        await update.message.reply_text("Miqdor noto‘g‘ri kiritildi!")
+
+# Botni ishga tushirish
+def main():
+    TOKEN = "Bu yerda o'z tokeningizni kiriting"  # O'z tokeningni shu yerga yoz!
+    app = Application.builder().token(TOKEN).build()
+    
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, convert))
+
+    print("Bot ishga tushdi...")
+    app.run_polling()
+
+if __name__ == "__main__":
+    main()
